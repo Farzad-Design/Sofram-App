@@ -45,7 +45,7 @@ a{text-decoration:none;color:inherit}
 @media(min-width:1024px){.container{padding:0 48px}}
 
 /* ── Buttons ─────────────────────────────────────────*/
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:12px 28px;border-radius:6px;transition:all var(--tr);cursor:pointer;white-space:nowrap;border:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:12px 28px;border-radius:6px;transition:all var(--tr);cursor:pointer;white-space:nowrap;border:none;touch-action:manipulation}
 .btn-primary{background:var(--ember);color:#fff}
 .btn-primary:hover{background:var(--ember2);box-shadow:0 0 28px rgba(238,134,0,.4)}
 .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.22)}
@@ -144,8 +144,8 @@ a{text-decoration:none;color:inherit}
   100% {opacity:0; transform:scale(1)}
 }
 .hero-slide-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,8,.82) 0%,rgba(8,8,8,.55) 50%,rgba(8,8,8,.75) 100%);z-index:1}
-.hero-glow-1{position:absolute;top:-80px;right:-80px;width:600px;height:600px;border-radius:50%;background:rgba(238,134,0,.05);filter:blur(120px);animation:glow-pulse 4s ease-in-out infinite;z-index:2}
-.hero-glow-2{position:absolute;bottom:0;left:0;width:400px;height:400px;border-radius:50%;background:rgba(238,134,0,.03);filter:blur(100px);z-index:2}
+.hero-glow-1{position:absolute;top:-80px;right:-80px;width:600px;height:600px;border-radius:50%;background:rgba(238,134,0,.05);filter:blur(120px);animation:glow-pulse 4s ease-in-out infinite;z-index:2;pointer-events:none}
+.hero-glow-2{position:absolute;bottom:0;left:0;width:400px;height:400px;border-radius:50%;background:rgba(238,134,0,.03);filter:blur(100px);z-index:2;pointer-events:none}
 .hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.015;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:80px 80px;z-index:2}
 .hero-inner{position:relative;z-index:10;padding:120px 0 80px;width:100%}
 .hero-layout{display:grid;gap:48px;align-items:center;max-width:720px}
@@ -285,8 +285,9 @@ a{text-decoration:none;color:inherit}
 .food-card-foot{display:flex;align-items:center;justify-content:space-between}
 .food-price{font-family:var(--display);font-size:22px;font-weight:700;color:var(--ember3)}
 .add-btn{
-  width:32px;height:32px;border-radius:8px;
+  width:38px;height:38px;border-radius:8px;
   background:var(--ember);color:#fff;
+  touch-action:manipulation;
   display:flex;align-items:center;justify-content:center;
   font-size:20px;font-weight:700;line-height:1;
   transition:all .2s;
@@ -320,7 +321,7 @@ a{text-decoration:none;color:inherit}
 .ci-name{font-size:13px;font-weight:600;margin-bottom:3px}
 .ci-price{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ember3)}
 .ci-qty{display:flex;align-items:center;gap:8px}
-.cqb{width:26px;height:26px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--ember3);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
+.cqb{width:34px;height:34px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--ember3);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;touch-action:manipulation}
 .cqb:hover{border-color:var(--ember);background:var(--ember-bg)}
 .cqn{font-size:13px;font-weight:700;min-width:20px;text-align:center}
 .cart-footer{padding:16px 20px 24px;border-top:1px solid var(--border);flex-shrink:0}
