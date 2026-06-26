@@ -857,7 +857,17 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
   </div>
  </div>
  <div class="cart-footer" id="cart-footer" style="display:none">
-  <div style="margin-bottom:12px"><span class="mode-pill liefern" id="mode-cart-badge">🛵 Lieferung</span></div>
+  <!-- Mode switcher inside cart -->
+  <div style="display:flex;gap:8px;margin-bottom:14px">
+   <button id="cart-btn-liefern" onclick="setMode('liefern')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--ember);background:var(--ember);color:#fff;transition:all .2s">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    Liefern
+   </button>
+   <button id="cart-btn-abholen" onclick="setMode('abholen')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--card);color:var(--t2);transition:all .2s">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+    Abholen −15%
+   </button>
+  </div>
   <div class="cart-summary-row"><span>Zwischensumme</span><span id="subtotal">€0.00</span></div>
   <div class="cart-summary-row" id="discount-row" style="display:none;color:#4CAF7D">
    <span>✓ Abholrabatt (15%)</span><span id="discount-amount">-€0.00</span>
@@ -940,17 +950,24 @@ let orderMode = 'liefern'; // 'liefern' | 'abholen'
 
 function setMode(m){
   orderMode = m;
+  // Hero buttons
   document.getElementById('btn-liefern').classList.toggle('active', m==='liefern');
   document.getElementById('btn-abholen').classList.toggle('active', m==='abholen');
   const note = document.getElementById('abholen-note');
   note.style.display = m==='abholen' ? 'flex' : 'none';
-  updateCart();
-  // Update cart header badge
-  const badge = document.getElementById('mode-cart-badge');
-  if(badge){
-    badge.className = 'mode-pill ' + m;
-    badge.textContent = m==='liefern' ? '🛵 Lieferung' : '🛍️ Abholung';
+  // Cart inline buttons
+  const cl = document.getElementById('cart-btn-liefern');
+  const ca = document.getElementById('cart-btn-abholen');
+  if(cl && ca){
+    if(m==='liefern'){
+      cl.style.background='var(--ember)'; cl.style.borderColor='var(--ember)'; cl.style.color='#fff';
+      ca.style.background='var(--card)';  ca.style.borderColor='var(--border)'; ca.style.color='var(--t2)';
+    } else {
+      ca.style.background='#4CAF7D'; ca.style.borderColor='#4CAF7D'; ca.style.color='#fff';
+      cl.style.background='var(--card)';  cl.style.borderColor='var(--border)'; cl.style.color='var(--t2)';
+    }
   }
+  updateCart();
 }
 
 // Init default
