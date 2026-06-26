@@ -1401,13 +1401,17 @@ function scrollSec(id){ document.getElementById(id)?.scrollIntoView({behavior:'s
   function setActive(id){
     navBtns.forEach(b => b.classList.toggle('active', b.dataset.sec === id));
   }
-  const spy = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) setActive(e.target.id); });
-  }, {threshold:0.25});
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) spy.observe(el);
-  });
+  function onScroll(){
+    const mid = window.scrollY + window.innerHeight * 0.35;
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && el.offsetTop <= mid) current = id;
+    });
+    setActive(current);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 })();
 
 /* ── Reveal on scroll ───────────────────────────────── */
