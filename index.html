@@ -1503,7 +1503,7 @@ const pwaOverlay = document.getElementById('pwa-modal-overlay');
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 const isInStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
 
-if(!isInStandalone){
+if(false && !isInStandalone){
   if(isIOS){
     setTimeout(() => {
       pwaBanner.style.display = 'flex';
