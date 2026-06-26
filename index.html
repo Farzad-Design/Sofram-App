@@ -550,11 +550,11 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
     <img src="Logo.svg" alt="Sofram" class="logo-img">
    </div>
    <nav class="nav-links">
-    <button class="nav-link active" onclick="scrollSec('hero')">Home</button>
-    <button class="nav-link" onclick="scrollSec('menu')">Speisekarte</button>
-    <button class="nav-link" onclick="scrollSec('kombis')">Menüs</button>
-    <button class="nav-link" onclick="scrollSec('about')">Über uns</button>
-    <button class="nav-link" onclick="scrollSec('contact')">Kontakt</button>
+    <button class="nav-link active" data-sec="hero" onclick="scrollSec('hero')">Home</button>
+    <button class="nav-link" data-sec="menu" onclick="scrollSec('menu')">Speisekarte</button>
+    <button class="nav-link" data-sec="kombis" onclick="scrollSec('kombis')">Menüs</button>
+    <button class="nav-link" data-sec="about" onclick="scrollSec('about')">Über uns</button>
+    <button class="nav-link" data-sec="contact" onclick="scrollSec('contact')">Kontakt</button>
    </nav>
    <div class="nav-right">
     <a href="account.html" class="cart-btn" style="text-decoration:none" title="Mein Konto">
@@ -1393,6 +1393,22 @@ function closeMobile(){ mobileOpen=false; document.getElementById('mobile-menu')
 
 /* ── Scroll ──────────────────────────────────────────── */
 function scrollSec(id){ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
+
+/* ── Scroll Spy ─────────────────────────────────────── */
+(function(){
+  const sections = ['hero','menu','kombis','about','contact'];
+  const navBtns = document.querySelectorAll('.nav-link[data-sec]');
+  function setActive(id){
+    navBtns.forEach(b => b.classList.toggle('active', b.dataset.sec === id));
+  }
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) setActive(e.target.id); });
+  }, {threshold:0.25});
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) spy.observe(el);
+  });
+})();
 
 /* ── Reveal on scroll ───────────────────────────────── */
 const observer = new IntersectionObserver(entries => {
