@@ -1023,7 +1023,7 @@ function catColor(cat){
 
 /* ── Render kombis ───────────────────────────────────── */
 function renderKombis(){
-  document.getElementById('kombis-grid').innerHTML = KOMBIS.map(k => `
+  document.getElementById('kombis-grid').innerHTML = KOMBIS.map((k,idx) => `
     <div class="kombi-card">
       ${k.img ? `<div class="kombi-img"><img src="${k.img}" alt="${k.name}" onerror="this.parentElement.style.display='none'"></div>` : ''}
       <div style="padding:18px 20px 20px">
@@ -1032,19 +1032,24 @@ function renderKombis(){
         <div class="kombi-desc">${k.desc}</div>
         <div class="kombi-foot">
           <div class="kombi-price">€${k.price.toFixed(2)}</div>
-          <button class="btn btn-primary" onclick="addKombi('${k.name}',${k.price},'${k.emoji}')">Bestellen</button>
+          <button class="btn btn-primary kombi-order-btn" data-idx="${idx}" style="touch-action:manipulation">Bestellen</button>
         </div>
       </div>
     </div>`).join('');
-}
 
-function addKombi(name, price, emoji){
-  const id = 'k_' + name;
-  const i = cart.findIndex(c => c.id === id);
-  if(i > -1) cart[i].qty++;
-  else cart.push({id, name, price, emoji, qty:1});
-  updateCart();
-  showToast(name);
+  document.querySelectorAll('.kombi-order-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const k = KOMBIS[parseInt(this.dataset.idx)];
+      const id = 'k_' + k.num;
+      const i = cart.findIndex(c => c.id === id);
+      if(i > -1) cart[i].qty++;
+      else cart.push({id, name: k.name, price: k.price, emoji: k.emoji, img: k.img||'', qty:1});
+      updateCart();
+      showToast(k.name);
+      document.getElementById('cart').classList.add('open');
+      document.getElementById('cart-overlay').classList.add('open');
+    });
+  });
 }
 
 /* ── Filter ─────────────────────────────────────────── */
