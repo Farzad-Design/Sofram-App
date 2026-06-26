@@ -469,13 +469,10 @@ textarea.form-input{resize:none;min-height:110px}
 }
 
 /* ── Footer ─────────────────────────────────────────── */
-footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 28px}
-.footer-inner{display:flex;flex-direction:column;gap:24px;align-items:center;text-align:center}
-@media(min-width:768px){.footer-inner{flex-direction:row;justify-content:space-between;text-align:left}}
-.footer-logo .logo-text span:first-child{font-size:15px}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
-.footer-legal{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;padding-top:12px;border-top:1px solid var(--border)}
-.footer-link{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);transition:color var(--tr);cursor:pointer;background:none;border:none;text-decoration:none}
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:20px 0}
+.footer-inner{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+@media(max-width:767px){.footer-inner{flex-direction:column;align-items:center;text-align:center;gap:12px}}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);transition:color var(--tr);cursor:pointer;background:none;border:none;text-decoration:none;padding:4px 6px}
 .footer-link:hover{color:#fff}
 .footer-copy{font-size:11px;color:var(--t3)}
 
@@ -833,15 +830,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
  <div class="container">
   <div class="footer-inner">
    <div class="footer-logo">
-    <img src="Logo.svg" alt="Sofram" style="height:48px;width:auto;object-fit:contain">
+    <img src="Logo.svg" alt="Sofram" style="height:40px;width:auto;object-fit:contain">
    </div>
-   <div class="footer-links">
+   <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center">
     <button class="footer-link" onclick="scrollSec('menu')">Speisekarte</button>
     <button class="footer-link" onclick="scrollSec('kombis')">Menüs</button>
     <button class="footer-link" onclick="scrollSec('about')">Über uns</button>
     <button class="footer-link" onclick="scrollSec('contact')">Kontakt</button>
-   </div>
-   <div class="footer-legal">
+    <span style="color:var(--border);padding:0 4px">|</span>
     <a class="footer-link" href="impressum.html">Impressum</a>
     <a class="footer-link" href="datenschutz.html">Datenschutz</a>
     <a class="footer-link" href="agb.html">AGB</a>
@@ -854,7 +850,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 0 2
      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
     </a>
    </div>
-   <div class="footer-copy">© 2026 Sofram · Markt 4, 42853 Remscheid · 02191 84 28 005</div>
+   <div class="footer-copy">© 2026 Sofram · Remscheid</div>
   </div>
  </div>
 </footer>
