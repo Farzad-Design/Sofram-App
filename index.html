@@ -101,6 +101,14 @@ a{text-decoration:none;color:inherit}
   transition:all var(--tr);cursor:pointer;
 }
 .cart-btn:hover{border-color:var(--ember);background:var(--ember-bg)}
+@keyframes cartBounce{
+  0%  {transform:scale(1)}
+  25% {transform:scale(1.18)}
+  50% {transform:scale(0.92)}
+  70% {transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+.cart-bounce{animation:cartBounce .45s ease;border-color:var(--ember) !important;background:var(--ember-bg) !important}
 .cart-count{background:var(--ember);color:#fff;font-size:9px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .burger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
 .burger span{display:block;width:22px;height:1.5px;background:#fff;border-radius:2px;transition:all .3s}
@@ -1038,8 +1046,7 @@ function addKombi(idx){
   else cart.push({id, name: k.name, price: k.price, emoji: k.emoji, img: k.img||'', qty:1});
   updateCart();
   showToast(k.name);
-  document.getElementById('cart').classList.add('open');
-  document.getElementById('cart-overlay').classList.add('open');
+  bounceCart();
 }
 
 function renderKombis(){
@@ -1073,6 +1080,14 @@ function filterCat(cat, el){
 }
 
 /* ── Cart ────────────────────────────────────────────── */
+function bounceCart(){
+  const btn = document.querySelector('.cart-btn');
+  if(!btn) return;
+  btn.classList.remove('cart-bounce');
+  void btn.offsetWidth;
+  btn.classList.add('cart-bounce');
+}
+
 function addToCart(id){
   const food = FOODS.find(f => f.id === id);
   if(!food) return;
@@ -1081,6 +1096,7 @@ function addToCart(id){
   else cart.push({id: food.id, name: food.name, price: food.price, emoji: food.emoji, img: food.img||'', qty:1});
   updateCart();
   showToast(food.name);
+  bounceCart();
 }
 
 function removeFromCart(id){
