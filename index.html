@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sofram – Türkische Spezialitäten</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#EE8600">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sofram">
+<link rel="apple-touch-icon" href="Logo.svg">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Birthstone&display=swap" rel="stylesheet">
 <style>
 /* ── Reset & Tokens ─────────────────────────────────── */
@@ -1437,6 +1443,10 @@ function renderSaucen(){
 renderGrid('all');
 renderKombis();
 renderSaucen();
+
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js');
+}
 </script>
 
 <!-- ═══ CHECKOUT MODAL ══════════════════════════════════ -->
