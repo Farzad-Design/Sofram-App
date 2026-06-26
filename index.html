@@ -318,7 +318,10 @@ a{text-decoration:none;color:inherit}
 .ci-emoji{width:52px;height:52px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--card2);overflow:hidden}
 .ci-emoji img{width:100%;height:100%;object-fit:cover}
 .ci-info{flex:1}
-.ci-name{font-size:13px;font-weight:600;margin-bottom:3px}
+.ci-name-row{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:3px}
+.ci-name{font-size:13px;font-weight:600}
+.ci-del{background:none;border:none;cursor:pointer;color:var(--t3);padding:2px;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:color .15s;flex-shrink:0}
+.ci-del:hover{color:#f44}
 .ci-price{font-family:var(--display);font-size:15px;font-weight:700;color:var(--ember3)}
 .ci-qty{display:flex;align-items:center;gap:8px}
 .cqb{width:34px;height:34px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--ember3);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;touch-action:manipulation}
@@ -1075,6 +1078,12 @@ function addToCart(id){
   showToast(food.name);
 }
 
+function removeFromCart(id){
+  const i = cart.findIndex(c => c.id == id);
+  if(i > -1) cart.splice(i, 1);
+  updateCart();
+}
+
 function chgQty(id, d){
   const i = cart.findIndex(c => c.id == id);
   if(i < 0) return;
@@ -1113,7 +1122,10 @@ function updateCart(){
       <div class="cart-item">
         <div class="ci-emoji">${item.img ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:10px" onerror="this.parentElement.textContent='${item.emoji}'">` : item.emoji}</div>
         <div class="ci-info">
-          <div class="ci-name">${item.name}</div>
+          <div class="ci-name-row">
+            <div class="ci-name">${item.name}</div>
+            <button class="ci-del" onclick="removeFromCart(${JSON.stringify(item.id)})" title="Entfernen" style="touch-action:manipulation"><svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+          </div>
           <div class="ci-price">€${(item.price * item.qty).toFixed(2)}</div>
           <div class="ci-qty">
             <div class="cqb" onclick="chgQty(${JSON.stringify(item.id)},-1)">−</div>
